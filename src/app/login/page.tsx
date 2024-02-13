@@ -1,6 +1,7 @@
 // src/app/auth/login/page.tsx
 'use client'
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation'; // useRouterをインポート
 import { Box, Button, FormControl, FormLabel, Input, Stack, useToast } from '@chakra-ui/react';
 import { login, isLoginResponse } from '../../api/auth';
 
@@ -8,6 +9,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const toast = useToast();
+  const router = useRouter(); // useRouterフックを使用
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,7 +24,8 @@ const LoginPage = () => {
         duration: 5000,
         isClosable: true,
       });
-      // 成功後のリダイレクトや追加の処理
+      // 成功後のリダイレクト処理
+      router.push('/'); // トップページにリダイレクト
     } else {
       toast({
         title: 'Login Failed',
